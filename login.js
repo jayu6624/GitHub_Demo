@@ -25,6 +25,20 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.get('/', (req, res) => {
     res.send('Hello World!');
 });
+
+app.post('/login', (req, res) => {
+    const { username, password } = req.body;
+    if (username === 'admin' && password === 'password') {
+        res.status(200).send({ message: 'Login successful' });
+    } else {
+        res.status(401).send({ message: 'Invalid credentials' });
+    }   
+});
+
 app.listen(port, () => {
     console.log(`Server is running at http://localhost:${port}`);
 });
+
+
+// Export the app for testing purposes
+module.exports = app;
